@@ -1,4 +1,5 @@
-//*Adding and Removing Properties:
+//*Enumerating or iterating Properties of an Object
+//NOTE: Enumerating means to go through each property of an object one by one using for in loop
 
 function Circle(radius) {
   this.radius = radius;
@@ -9,13 +10,23 @@ function Circle(radius) {
 
 const circle = new Circle(10);
 
-circle.location = { x: 1 };
-circle["location"] = { x: 1 };
-//NOTE: Js object is dynamic, we can add and remove properties after creating an object
-//NOTE: we can add properties to object using dot notation or bracket notation, if we want to access  or add  a property dynamically we only use bracket notation.Another use case of bracket notation is when we have a property name with space in it or when we have a property name that starts with a number or when we have a property name that is not a valid identifier
+for (let key in circle) {
+  if (typeof circle[key] !== "function") {
+    console.log(key, circle[key]);
+  }
+}
 
-const propertyName = "center-location";
-//circle.center-location
-circle[propertyName] = { x: 1 };
+const keys = Object.keys(circle);
+console.log(keys); //['radius', 'draw']
 
-delete circle.location; //removing a property from an object
+//NOTE: with Object.keys() methods we cannot separate the properties from methods, we can only get the properties of an object
+
+//NOTE: with for in loop we can separate the properties and methods of an object
+
+//NOTE: in operator is used to check if a property exists in an object or not
+//NOTE: in operator returns true if the property exists in the object or its prototype chain
+if ("radius" in circle) {
+  console.log("Circle has a radius property");
+}
+
+console.log("radius" in circle); //true
